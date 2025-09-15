@@ -7,11 +7,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagGameDatabase;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.List;
 
-//CHANGE
+
 @TeleOp(name = "April Tag Detector")
 public class ATVision extends LinearOpMode {
 
@@ -31,6 +32,7 @@ public class ATVision extends LinearOpMode {
             telemetry.update();
         }
 
+        visionPortal.close();
     }
     private void initAprilTag() {
 
@@ -41,15 +43,7 @@ public class ATVision extends LinearOpMode {
                 .setDrawCubeProjection(true)
                 .setDrawTagOutline(true)
                 .setDrawTagID(true)
-                //.setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
-                //.setTagLibrary(AprilTagGameDatabase.getCenterStageTagLibrary())
-                //.setOutputUnits(DistanceUnit.INCH, AngleUnit.DEGREES)
-
-                // == CAMERA CALIBRATION ==
-                // If you do not manually specify calibration parameters, the SDK will attempt
-                // to load a predefined calibration for your camera.
-                //.setLensIntrinsics(578.272, 578.272, 402.145, 221.506)
-                // ... these parameters are fx, fy, cx, cy.
+                .setTagLibrary(AprilTagGameDatabase.getDecodeTagLibrary())
 
                 .build();
 
@@ -60,7 +54,7 @@ public class ATVision extends LinearOpMode {
         // Decimation = 3 ..  Detect 2" Tag from 4  feet away at 30 Frames Per Second (default)
         // Decimation = 3 ..  Detect 5" Tag from 10 feet away at 30 Frames Per Second (default)
         // Note: Decimation can be changed on-the-fly to adapt during a match.
-        //aprilTag.setDecimation(3);
+        aprilTag.setDecimation(3);
 
         VisionPortal.Builder builder = new VisionPortal.Builder();
         builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
@@ -78,12 +72,11 @@ public class ATVision extends LinearOpMode {
         List<AprilTagDetection> currentDetections = aprilTag.getDetections();
         telemetry.addData("# AprilTags Detected", currentDetections.size());
 
-
         for (AprilTagDetection detection : currentDetections) {
             if (detection.metadata != null) {
-                telemetry.addLine(String.format("\n==== (ID %d) %s", detection.id, detection.metadata.name));
+                telemetry.addLine(String.format("\n (ID %d) %s", detection.id, detection.metadata.name));
             } else {
-                telemetry.addLine(String.format("\n==== (ID %d) Unknown", detection.id));
+                telemetry.addLine(String.format("\n. (ID %d) Unknown", detection.id));
             }
         }
     }
