@@ -10,7 +10,7 @@ public class LanzadorV1 extends LinearOpMode {
 
     public DcMotor leftSide;
     public DcMotor rightSide;
-
+    
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -25,6 +25,7 @@ public class LanzadorV1 extends LinearOpMode {
 
         leftSide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightSide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         waitForStart();
 
