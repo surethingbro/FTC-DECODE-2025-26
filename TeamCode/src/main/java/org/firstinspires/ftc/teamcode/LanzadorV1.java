@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.Line;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class LanzadorV1 extends LinearOpMode {
 
-    public DcMotor leftSide;
+    public DcMotor leftSide = null;
     public DcMotor rightSide;
     
     @Override
@@ -23,7 +24,7 @@ public class LanzadorV1 extends LinearOpMode {
         leftSide.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSide.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftSide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftSide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE   );
         rightSide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 

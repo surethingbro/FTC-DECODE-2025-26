@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Mechanisms;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -10,6 +11,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class ColorSensor {
 
     NormalizedColorSensor colorSensor;
+
+
 
     public enum detectedColor {
         RED,
@@ -20,9 +23,8 @@ public class ColorSensor {
 
      public void initialize(HardwareMap hwMap) {
         colorSensor = hwMap.get(NormalizedColorSensor.class, "sigma_detector");
-        colorSensor.setGain(4);
+        colorSensor.setGain(8);
     }
-
     public detectedColor getDetectedColor(Telemetry telemetry) {
 
         NormalizedRGBA colors = colorSensor.getNormalizedColors(); //this will return 4 values, red, green, blue, and alpha
@@ -38,22 +40,20 @@ public class ColorSensor {
 
         //TODO add if statements for specific colors added
 
-
         /*
-        red,green,blue
-        RED =
-        YELLOW = <0.47, <.12, <.13
-        BLUE =
-         */
+        > mayor que
+        < menor que
 
-        if (normRed > 0.35 && normGreen < 0.3 && normBlue < 0.3) {
+         */
+        if (normRed > normBlue && normRed > normGreen) {
             return detectedColor.RED;
-        } else if (normRed < 0.47 && normGreen < 0.12 && normBlue < 0.13) {
-            return detectedColor.YELLOW;
-        } else if (normRed < 0.2 && normGreen < 0.5 && normBlue > 0.5) {
+        } else if (normBlue > normRed && normBlue > normGreen) {
             return detectedColor.BLUE;
+        } else if (normRed > normBlue && normGreen > normBlue) {
+            return detectedColor.YELLOW;
+        } else {
+            return detectedColor.UNKNOWN;
         }
-        return detectedColor.UNKNOWN;
     }
 
 }

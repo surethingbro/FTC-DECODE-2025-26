@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@TeleOp
+@Disabled
 public class REVStarterBotTeleOpJava extends LinearOpMode {
 
   private DcMotor flywheel;
@@ -51,7 +52,7 @@ public class REVStarterBotTeleOpJava extends LinearOpMode {
   }
 
   /**
-   * Controls for the drivetrain. The robot uses a split stick stlye arcade drive. 
+   * Controls for the drivetrain. The robot uses a split stick style arcade drive.
    * Forward and back is on the left stick. Turning is on the right stick.
    */
   private void splitStickArcadeDrive() {
