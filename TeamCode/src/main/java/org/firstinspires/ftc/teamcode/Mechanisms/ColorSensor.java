@@ -15,9 +15,8 @@ public class ColorSensor {
 
 
     public enum detectedColor {
-        RED,
-        BLUE,
-        YELLOW,
+        PURPLE,
+        GREEN,
         UNKNOWN
     }
 
@@ -45,12 +44,10 @@ public class ColorSensor {
         < menor que
 
          */
-        if (normRed > normBlue && normRed > normGreen) {
-            return detectedColor.RED;
-        } else if (normBlue > normRed && normBlue > normGreen) {
-            return detectedColor.BLUE;
-        } else if (normRed > normBlue && normGreen > normBlue) {
-            return detectedColor.YELLOW;
+        if (normRed > normGreen && normBlue > normGreen) {
+            return detectedColor.PURPLE;
+        } else if (normGreen > normRed && normGreen > normBlue) {
+            return detectedColor.GREEN;
         } else {
             return detectedColor.UNKNOWN;
         }
