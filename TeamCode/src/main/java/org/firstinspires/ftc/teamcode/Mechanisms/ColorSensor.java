@@ -44,7 +44,7 @@ public class ColorSensor {
         < less than
 
          */
-        if (normRed > normGreen && normBlue > normGreen) {
+        if (normGreen > normRed  && normBlue > normGreen) {
             return detectedColor.PURPLE;
         } else if (normGreen > normRed && normGreen > normBlue) {
             return detectedColor.GREEN;
