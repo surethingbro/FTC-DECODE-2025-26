@@ -26,7 +26,7 @@ public class ColorSensor {
     }
     public detectedColor getDetectedColor(Telemetry telemetry) {
 
-        NormalizedRGBA colors = colorSensor.getNormalizedColors(); //this will return 4 values, red, green, blue, and alpha
+        NormalizedRGBA colors = colorSensor.getNormalizedColors();
 
         float normRed, normGreen, normBlue;
         normRed = colors.red/ colors.alpha;
@@ -40,8 +40,8 @@ public class ColorSensor {
         //TODO add if statements for specific colors added
 
         /*
-        > mayor que
-        < menor que
+        > greater than
+        < less than
 
          */
         if (normRed > normGreen && normBlue > normGreen) {
@@ -53,5 +53,17 @@ public class ColorSensor {
         }
     }
 
+    /*private double getEntrySensorHue()
+    {
+        float[] hsvValues = {0.0f, 0.0f, 0.0f};
+        NormalizedRGBA normalizedColors = entryAnalogSensor.getNormalizedColors();
+        Color.RGBToHSV(
+                (int) (normalizedColors.red255),
+                (int) (normalizedColors.green255),
+                (int) (normalizedColors.blue*255),
+                hsvValues);
+        return hsvValue[0];
+    }   //getEntrySensorHue
+*/
 }
 

@@ -30,15 +30,12 @@ public class ColorServo extends LinearOpMode {
             detectedColor = sigmaD.getDetectedColor(telemetry);
             telemetry.addData("Detected Color", detectedColor);
 
-            if (detectedColor == ColorSensor.detectedColor.RED) {
+            if (detectedColor == ColorSensor.detectedColor.PURPLE) {
                 servo.setPos(1);
-                telemetry.addLine("COLOR == RED, MOVING TO POS 1");
-            } else if (detectedColor == ColorSensor.detectedColor.YELLOW) {
+                telemetry.addLine("COLOR == PURPLE, MOVING TO POS 1");
+            } else if (detectedColor == ColorSensor.detectedColor.GREEN) {
                 servo.setPos(0);
-                telemetry.addLine("COLOR == YELLOW, MOVING TO POS 0");
-            } else if (detectedColor == ColorSensor.detectedColor.BLUE) {
-                servo.setPos(0.5);
-                telemetry.addLine("COLOR == BLUE, MOVING TO POS 0.5");
+                telemetry.addLine("COLOR == GREEN, MOVING TO POS 0");
             } else if (detectedColor == ColorSensor.detectedColor.UNKNOWN){
                 telemetry.addLine("COLOR NOT DETECTED");
             }

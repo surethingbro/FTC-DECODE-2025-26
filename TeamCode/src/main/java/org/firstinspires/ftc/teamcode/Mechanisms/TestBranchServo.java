@@ -14,6 +14,4 @@ public class TestBranchServo {
     public void setPos(double angle) {
         servo.setPosition(angle);
     }
-
-
 }
