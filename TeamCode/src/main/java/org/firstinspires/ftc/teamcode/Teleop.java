@@ -88,7 +88,6 @@ public class Teleop extends LinearOpMode {
             telemetry.update();
         }
     }
-
     /**
      * This if/else statement contains the controls for the flywheel, both manual and auto.
      * b and x will spin up ONLY the flywheel to the target velocity set.
@@ -114,8 +113,6 @@ public class Teleop extends LinearOpMode {
             }
         }
     }
-
-
     /**
      * The bank shot or near velocity is intended for launching balls touching or a few inches from the goal.
      * When running this function, the flywheel will spin up and the Core Hex will wait before balls can be fed.
@@ -131,7 +128,6 @@ public class Teleop extends LinearOpMode {
             coreHex.setPower(0);
         }
     }
-
     /**
      * The far power velocity is intended for launching balls a few feet from the goal. It may require adjusting the deflector.
      * When running this function, the flywheel will spin up and the Core Hex will wait before balls can be fed.

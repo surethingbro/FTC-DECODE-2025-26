@@ -9,17 +9,17 @@ import org.firstinspires.ftc.teamcode.Mechanisms.TestBranchServo;
 @TeleOp
 public class ColorServo extends LinearOpMode {
 
-    ColorSensor sigmaD = new ColorSensor();
+    ColorSensor sensor = new ColorSensor();
     ColorSensor.detectedColor detectedColor;
     TestBranchServo servo = new TestBranchServo();
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        sigmaD.initialize(hardwareMap);
+        sensor.initialize(hardwareMap);
         servo.init(hardwareMap);
 
-        servo.setPos(0);
+        servo.setRot(0);
 
         if (isStopRequested()) return;
 
@@ -27,15 +27,15 @@ public class ColorServo extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            detectedColor = sigmaD.getDetectedColor(telemetry);
+            detectedColor = sensor.getDetectedColor(telemetry);
             telemetry.addData("Detected Color", detectedColor);
 
             if (detectedColor == ColorSensor.detectedColor.PURPLE) {
-                servo.setPos(1);
-                telemetry.addLine("COLOR == PURPLE, MOVING TO POS 1");
+                servo.setRot(1);
+                telemetry.addLine("COLOR == PURPLE, MOVING TO SPEED 1");
             } else if (detectedColor == ColorSensor.detectedColor.GREEN) {
-                servo.setPos(0);
-                telemetry.addLine("COLOR == GREEN, MOVING TO POS 0");
+                servo.setRot(0);
+                telemetry.addLine("COLOR == GREEN, MOVING TO SPEED 0");
             } else if (detectedColor == ColorSensor.detectedColor.UNKNOWN){
                 telemetry.addLine("COLOR NOT DETECTED");
             }

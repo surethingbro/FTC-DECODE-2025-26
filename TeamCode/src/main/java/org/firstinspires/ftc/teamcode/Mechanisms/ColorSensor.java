@@ -3,16 +3,12 @@ package org.firstinspires.ftc.teamcode.Mechanisms;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 
 public class ColorSensor {
 
     NormalizedColorSensor colorSensor;
-
-
 
     public enum detectedColor {
         PURPLE,
@@ -24,6 +20,7 @@ public class ColorSensor {
         colorSensor = hwMap.get(NormalizedColorSensor.class, "sigma_detector");
         colorSensor.setGain(8);
     }
+
     public detectedColor getDetectedColor(Telemetry telemetry) {
 
         NormalizedRGBA colors = colorSensor.getNormalizedColors();
@@ -42,8 +39,8 @@ public class ColorSensor {
         /*
         > greater than
         < less than
-
          */
+
         if (normGreen > normRed  && normBlue > normGreen) {
             return detectedColor.PURPLE;
         } else if (normGreen > normRed && normGreen > normBlue) {
@@ -52,18 +49,5 @@ public class ColorSensor {
             return detectedColor.UNKNOWN;
         }
     }
-
-    /*private double getEntrySensorHue()
-    {
-        float[] hsvValues = {0.0f, 0.0f, 0.0f};
-        NormalizedRGBA normalizedColors = entryAnalogSensor.getNormalizedColors();
-        Color.RGBToHSV(
-                (int) (normalizedColors.red255),
-                (int) (normalizedColors.green255),
-                (int) (normalizedColors.blue*255),
-                hsvValues);
-        return hsvValue[0];
-    }   //getEntrySensorHue
-*/
 }
 
