@@ -1,17 +1,27 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 
 import android.graphics.Color;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ColorSensorHSV {
 
     public NormalizedColorSensor colorSensor;
     public float[] hsv = new float[3];
 
-    public ColorSensorHSV(NormalizedColorSensor sensor) {
-        this.colorSensor = sensor;
+    public void initialize(HardwareMap hwMap) {
+        colorSensor = hwMap.get(NormalizedColorSensor.class, "sensor");
+        colorSensor.setGain(8);
+    }
+
+    public enum DetectedColor {
+        PURPLE,
+        GREEN,
+        UNKNOWN
     }
 
     public void getHSV() {
@@ -31,17 +41,17 @@ public class ColorSensorHSV {
         return hsv[0];
     }
 
-    public String getColorName() {
+    public DetectedColor getDetectedColor(Telemetry telemetry) {
         float hue = hsv[0];
 
+        telemetry.addData("H", hue);
+
         if (hue >= 79 && hue <= 155) {
-            return "GREEN";
+            return DetectedColor.GREEN;
         } else if (hue >= 273 && hue <= 321) {
-            return "PURPLE";
+            return DetectedColor.PURPLE;
         } else {
-            return "UNKNOWN";
+            return DetectedColor.UNKNOWN;
         }
     }
-
-
 }
