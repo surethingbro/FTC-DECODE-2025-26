@@ -9,7 +9,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@TeleOp(name= "test")
+@TeleOp
 public class Test extends LinearOpMode {
 
     private OpenCvCamera camera;
