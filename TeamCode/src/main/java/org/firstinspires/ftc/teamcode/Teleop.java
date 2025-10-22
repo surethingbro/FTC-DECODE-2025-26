@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-@TeleOp
 
+//@TeleOp
+
+@Disabled
 public class Teleop extends LinearOpMode {
 
     public DcMotor frontLeft;
@@ -22,13 +25,14 @@ public class Teleop extends LinearOpMode {
     private static final int farVelocity = 1900;
     private static final int maxVelocity = 2200;
 
+
     @Override
     public void runOpMode() throws InterruptedException {
 
-        frontLeft = hardwareMap.get(DcMotorEx.class,"left");
-        backLeft = hardwareMap.get(DcMotorEx.class,"backLeft");
-        frontRight = hardwareMap.get(DcMotorEx.class,"right");
-        backRight = hardwareMap.get(DcMotorEx.class,"backRight");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "left");
+        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
+        frontRight = hardwareMap.get(DcMotorEx.class, "right");
+        backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         launcher = hardwareMap.get(DcMotorEx.class,"launcher");
         coreHex = hardwareMap.get(DcMotorEx.class,"coreHex");
 
@@ -38,6 +42,8 @@ public class Teleop extends LinearOpMode {
         launcher.setDirection(DcMotor.Direction.REVERSE);
         coreHex.setDirection(DcMotor.Direction.REVERSE);
 
+
+
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
 
@@ -46,7 +52,9 @@ public class Teleop extends LinearOpMode {
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+
         servo.setPower(0);
+
 
         waitForStart();
 
@@ -56,7 +64,7 @@ public class Teleop extends LinearOpMode {
 
             double forwardPower = -gamepad1.left_stick_y;
             double lateralPower = gamepad1.left_stick_x;
-            double turnPower = -gamepad1.right_stick_x;
+            double turnPower = gamepad1.right_stick_x;
 
             double denominator = Math.max(Math.abs(forwardPower) + Math.abs(lateralPower) + Math.abs(turnPower), 1);
             double frontLeftPower = (forwardPower + turnPower + lateralPower) / denominator;
@@ -69,9 +77,10 @@ public class Teleop extends LinearOpMode {
             frontRight.setPower(frontRightPower);
             backRight.setPower(backRightPower);
 
+
             setFlywheelVelocity();
 
-            // Manual control for the Core Hex intake
+            // Manual control for the Core Hex x
             if (gamepad1.a) {
                 coreHex.setPower(0.5);
             } else if (gamepad1.y) {
@@ -88,11 +97,14 @@ public class Teleop extends LinearOpMode {
             telemetry.update();
         }
     }
-    /**
-     * This if/else statement contains the controls for the flywheel, both manual and auto.
-     * b and x will spin up ONLY the flywheel to the target velocity set.
-     * The bumpers will activate the flywheel, Core Hex feeder, and servo to cycle a series of balls.
-     */
+
+
+            /**
+             * This if/else statement contains the controls for the flywheel, both manual and auto.
+             * b and x will spin up ONLY the flywheel to the target velocity set.
+             * The bumpers will activate the flywheel, Core Hex feeder, and servo to cycle a series of balls.
+             */
+
     private void setFlywheelVelocity() {
         if (gamepad1.start) {
             launcher.setPower(-0.5);
@@ -113,11 +125,13 @@ public class Teleop extends LinearOpMode {
             }
         }
     }
-    /**
-     * The bank shot or near velocity is intended for launching balls touching or a few inches from the goal.
-     * When running this function, the flywheel will spin up and the Core Hex will wait before balls can be fed.
-     * The servo will spin until the bumper is released.
-     */
+
+
+            /**
+             * The bank shot or near velocity is intended for launching balls touching or a few inches from the goal.
+             * When running this function, the flywheel will spin up and the Core Hex will wait before balls can be fed.
+             * The servo will spin until the bumper is released.
+             */
 
     private void bankShotAuto() {
         ((DcMotorEx) launcher).setVelocity(bankVelocity);
@@ -128,11 +142,15 @@ public class Teleop extends LinearOpMode {
             coreHex.setPower(0);
         }
     }
-    /**
-     * The far power velocity is intended for launching balls a few feet from the goal. It may require adjusting the deflector.
-     * When running this function, the flywheel will spin up and the Core Hex will wait before balls can be fed.
-     * The servo will spin until the bumper is released.
-     */
+
+
+            /**
+             * The far power velocity is intended for launching balls a few feet from the goal. It may require adjusting the deflector.
+             * When running this function, the flywheel will spin up and the Core Hex will wait before balls can be fed.
+             * The servo will spin until the bumper is released.
+             */
+
+
     private void farPowerAuto() {
         ((DcMotorEx) launcher).setVelocity(farVelocity);
         servo.setPower(-1);
@@ -140,8 +158,7 @@ public class Teleop extends LinearOpMode {
             coreHex.setPower(1);
         } else {
             coreHex.setPower(0);
+
+                }
+            }
         }
-    }
-
-
-}

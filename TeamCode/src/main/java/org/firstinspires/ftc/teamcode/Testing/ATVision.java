@@ -64,7 +64,6 @@ public class ATVision extends LinearOpMode {
                             rightSide.setPower(1);
                             break;
 
-
                         default:
                             leftSide.setPower(0);
                             rightSide.setPower(0);

@@ -18,7 +18,7 @@ public class ColorSensorHSV {
         colorSensor.setGain(8);
     }
 
-    public enum DetectedColor {
+    public  enum DetectedColor {
         PURPLE,
         GREEN,
         UNKNOWN
@@ -48,7 +48,7 @@ public class ColorSensorHSV {
 
         if (hue >= 79 && hue <= 155) {
             return DetectedColor.GREEN;
-        } else if (hue >= 273 && hue <= 321) {
+        } else if (hue >= 120 && hue <= 240) {
             return DetectedColor.PURPLE;
         } else {
             return DetectedColor.UNKNOWN;

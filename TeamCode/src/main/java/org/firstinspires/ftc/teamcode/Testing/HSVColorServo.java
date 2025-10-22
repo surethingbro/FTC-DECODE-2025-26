@@ -1,9 +1,15 @@
 package org.firstinspires.ftc.teamcode.Testing;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.teamcode.Mechanisms.ColorSensorHSV;
 import org.firstinspires.ftc.teamcode.Mechanisms.TestBranchServo;
 
+//@TeleOp
+
+@Disabled
 public class HSVColorServo extends LinearOpMode {
 
     ColorSensorHSV sensor = new ColorSensorHSV();
@@ -25,6 +31,7 @@ public class HSVColorServo extends LinearOpMode {
 
             sensor.getHSV();
 
+            telemetry.addData("Hue", sensor.getHue());
             DetectedColor = sensor.getDetectedColor(telemetry);
             telemetry.addData("DETECTED COLOR", DetectedColor);
 
@@ -38,7 +45,7 @@ public class HSVColorServo extends LinearOpMode {
                 telemetry.addLine("COLOR NOT DETECTED");
             }
 
-            telemetry.addData("Hue", sensor.getHue());
+
             telemetry.update();
 
 
