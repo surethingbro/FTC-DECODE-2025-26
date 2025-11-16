@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Mechanisms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -16,7 +15,7 @@ public class REVStarterBotTeleOpJava extends LinearOpMode {
   private CRServo servo;
   private DcMotor rightDrive;
 
-    // Setting our velocity targets. These values are in ticks per second!
+  // Setting our velocity targets. These values are in ticks per second!
   private static final int bankVelocity = 1300;
   private static final int farVelocity = 1900;
   private static final int maxVelocity = 2200;

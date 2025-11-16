@@ -13,12 +13,13 @@ public class ColorSensorHSV {
     public NormalizedColorSensor colorSensor;
     public float[] hsv = new float[3];
 
+
     public void initialize(HardwareMap hwMap) {
         colorSensor = hwMap.get(NormalizedColorSensor.class, "sensor");
         colorSensor.setGain(8);
     }
 
-    public  enum DetectedColor {
+    public enum DetectedColor {
         PURPLE,
         GREEN,
         UNKNOWN

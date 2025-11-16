@@ -7,16 +7,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
  
-//@TeleOp
+@TeleOp
 
-@Disabled
 public class MecanumTest extends LinearOpMode {
 
     public DcMotor frontLeft;
     public DcMotor backLeft;
     public DcMotor frontRight;
     public DcMotor backRight;
-    public DcMotor launcher;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,11 +23,6 @@ public class MecanumTest extends LinearOpMode {
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         frontRight = hardwareMap.get(DcMotorEx.class, "right");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
-
-        launcher = hardwareMap.get(DcMotorEx.class, "launcher");
-
-        launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        launcher.setDirection(DcMotor.Direction.REVERSE);
 
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -49,26 +42,24 @@ public class MecanumTest extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            double forwardPower = -gamepad1.left_stick_y;
-            double lateralPower = gamepad1.left_stick_x;
-            double turnPower = gamepad1.right_stick_x;
+            double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
+            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double rx = gamepad1.right_stick_x;
 
-            double denominator = Math.max(Math.abs(forwardPower) + Math.abs(lateralPower) + Math.abs(turnPower), 1);
-            double frontLeftPower = (forwardPower + turnPower + lateralPower) / denominator;
-            double frontRightPower = (forwardPower - turnPower - lateralPower) / denominator;
-            double backLeftPower = (forwardPower + turnPower - lateralPower) / denominator;
-            double backRightPower = (forwardPower - turnPower + lateralPower) / denominator;
+            // Denominator is the largest motor power (absolute value) or 1
+            // This ensures all the powers maintain the same ratio,
+            // but only if at least one is out of the range [-1, 1]
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            double frontLeftPower = (y + x + rx) / denominator;
+            double backLeftPower = (y - x + rx) / denominator;
+            double frontRightPower = (y - x - rx) / denominator;
+            double backRightPower = (y + x - rx) / denominator;
 
             frontLeft.setPower(frontLeftPower);
             backLeft.setPower(backLeftPower);
             frontRight.setPower(frontRightPower);
             backRight.setPower(backRightPower);
 
-            if (gamepad1.a) {
-                launcher.setPower(1);
-            } else if (gamepad1.b) {
-                launcher.setPower(0);
-            }
         }
     }
 }
