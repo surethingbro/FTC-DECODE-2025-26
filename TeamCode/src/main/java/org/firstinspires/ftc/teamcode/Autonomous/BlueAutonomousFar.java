@@ -33,7 +33,7 @@ public class BlueAutonomousFar extends LinearOpMode {
         public Intake(HardwareMap hardwareMap) {
             intake = hardwareMap.get(DcMotorEx.class, "intake");
             intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            intake.setDirection(DcMotorSimple.Direction.FORWARD);
+            intake.setDirection(DcMotorSimple.Direction.REVERSE);
         }
 
         public class IntakeOn implements Action {
@@ -79,6 +79,11 @@ public class BlueAutonomousFar extends LinearOpMode {
             launcher = hardwareMap.get(DcMotorEx.class, "launcher");
             coreHex = hardwareMap.get(DcMotorEx.class, "corehex");
             hopper = hardwareMap.get(CRServo.class, "hopper");
+
+            launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            launcher.setDirection(DcMotor.Direction.REVERSE);
+
+            coreHex.setDirection(DcMotor.Direction.REVERSE);
         }
 
         public class Launch implements Action {
