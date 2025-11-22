@@ -28,7 +28,7 @@ public class MeepMeepTesting {
         VelConstraint slowVel = new TranslationalVelConstraint(15);
         AccelConstraint slowAccel = new ProfileAccelConstraint(-20,20);
 
-        Pose2d initialPose = new Pose2d(-49, -50   ,(Math.PI / 4)); //45°
+        Pose2d initialPose = new Pose2d(-49, -50, (Math.PI / 4)); //45°
 
         //TODO: VERIFY THAT WE REALLY TAKE 5 SECONDS TO SHOOT THE BALLS (I HOPE WE DO NOT...) IF WE DON'T, CHANGE THE WAITSECONDS!!!!
         myBot.runAction(
