@@ -4,10 +4,16 @@ import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.AccelConstraint;
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.AngularVelConstraint;
+import com.acmerobotics.roadrunner.MinVelConstraint;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.acmerobotics.roadrunner.VelConstraint;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -20,11 +26,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+import java.util.Arrays;
+
 
 @Config
 @Autonomous
 @SuppressWarnings("unused")
-public class BlueAutonomousFar extends LinearOpMode {
+public class BlueAutonomousTouchingWall extends LinearOpMode {
 
     private static final int maxVelocity = 2200;
     public class Intake {
@@ -130,10 +138,9 @@ public class BlueAutonomousFar extends LinearOpMode {
                 new SequentialAction(drive.actionBuilder(initialPose)
                         .splineTo(new Vector2d(53,-10), Math.toRadians(210))
                         .afterTime(0.5, launcher.launch())
+
                         .build())
 
         );
-
-
     }
 }

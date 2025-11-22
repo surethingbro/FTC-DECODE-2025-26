@@ -22,13 +22,14 @@ public class Teleop extends LinearOpMode {
     public CRServo hopper;
 
     private static final int bankVelocity = 1300;
+    private static final int farVelocity = 1500;
     private static final int maxVelocity = 2200;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        frontLeft = hardwareMap.get(DcMotorEx.class, "left");
-        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "leftPar");
+        backLeft = hardwareMap.get(DcMotorEx.class, "backLeftPerp");
         frontRight = hardwareMap.get(DcMotorEx.class, "right");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         launcher = hardwareMap.get(DcMotorEx.class,"launcher");
@@ -40,6 +41,7 @@ public class Teleop extends LinearOpMode {
 
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         launcher.setDirection(DcMotor.Direction.REVERSE);
+
         coreHex.setDirection(DcMotor.Direction.REVERSE);
 
         frontRight.setDirection(DcMotor.Direction.REVERSE);
@@ -83,10 +85,9 @@ public class Teleop extends LinearOpMode {
             // Manual control for the Intake
             if (gamepad1.x) {
                 intake.setPower(1);
-                hopper.setPower(-1);
+
             } else if (gamepad1.b) {
                 intake.setPower(0);
-                hopper.setPower(0);
             }
 
             //TODO: Change gamepad controls according to each driver's preferences
@@ -120,7 +121,7 @@ public class Teleop extends LinearOpMode {
             farPowerAuto();
         } else if (gamepad1.right_bumper) {
             bankShotAuto();
-        } else {
+        }  else {
             ((DcMotorEx) launcher).setVelocity(0);
             coreHex.setPower(0);
             // The check below is in place to prevent stuttering with the servo. It checks if the servo is under manual control!
@@ -138,7 +139,7 @@ public class Teleop extends LinearOpMode {
 
     private void bankShotAuto() {
         ((DcMotorEx) launcher).setVelocity(bankVelocity);
-        hopper.setPower(-1);
+        hopper.setPower(1);
         if (((DcMotorEx) launcher).getVelocity() >= bankVelocity - 50) {
             coreHex.setPower(1);
         } else {
@@ -152,9 +153,9 @@ public class Teleop extends LinearOpMode {
      * The servo will spin until the bumper is released.
      */
     private void farPowerAuto() {
-        ((DcMotorEx) launcher).setVelocity(maxVelocity);
-        hopper.setPower(-1);
-        if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 100) {
+        ((DcMotorEx) launcher).setVelocity(farVelocity);
+        hopper.setPower(1);
+        if (((DcMotorEx) launcher).getVelocity() >= farVelocity - 300) {
             coreHex.setPower(1);
         } else {
             coreHex.setPower(0);
