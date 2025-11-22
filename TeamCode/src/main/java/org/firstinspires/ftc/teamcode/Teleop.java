@@ -23,7 +23,7 @@ public class Teleop extends LinearOpMode {
 
     private static final int bankVelocity = 1300;
     private static final int farVelocity = 1500;
-    private static final int maxVelocity = 2200;
+    //private static final int maxVelocity = 2200;
 
     @Override
     public void runOpMode() throws InterruptedException {
