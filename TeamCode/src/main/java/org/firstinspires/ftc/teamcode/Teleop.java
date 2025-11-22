@@ -140,9 +140,7 @@ public class Teleop extends LinearOpMode {
     private void bankShotAuto() {
         ((DcMotorEx) launcher).setVelocity(bankVelocity);
         hopper.setPower(1);
-
-        //TODO: CHECK IF -100 IS GOOD, IF NOT, RETURN TO -50
-        if (((DcMotorEx) launcher).getVelocity() >= bankVelocity - 100)  {
+        if (((DcMotorEx) launcher).getVelocity() >= bankVelocity - 50)  {
             coreHex.setPower(1);
         } else {
             coreHex.setPower(0);
