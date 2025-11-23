@@ -28,7 +28,10 @@ public class MeepMeepTesting {
         VelConstraint slowVel = new TranslationalVelConstraint(15);
         AccelConstraint slowAccel = new ProfileAccelConstraint(-20,20);
 
-        Pose2d initialPose = new Pose2d(-49, -50, (Math.PI / 4)); //45°
+
+         //BLUE AUTONOMOUS TOUCHING THE BLUE BASKET
+        /*Pose2d initialPose = new Pose2d(-49, -50, (Math.PI / 4)); //45°
+
 
         //TODO: VERIFY THAT WE REALLY TAKE 5 SECONDS TO SHOOT THE BALLS (I HOPE WE DO NOT...) IF WE DON'T, CHANGE THE WAITSECONDS!!!!
         myBot.runAction(
@@ -39,7 +42,7 @@ public class MeepMeepTesting {
                         .turn((Math.PI * 5) / 4) // TURN 225° (IN RADIANS OFC), TO ALIGN WITH THE THREE ARTIFACTS
                         .lineToYLinearHeading(-30, (Math.PI * 3) / 2)  //GET CLOSE TO THEM (HEADING 270°)
 
-                        .splineToLinearHeading(new Pose2d(-11.5,-55,(Math.PI * 3) / 2),(Math.PI * 3) / 2 ,
+                        .splineToLinearHeading(new Pose2d(-11.5,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2 ,
                                 slowVel,
                                 slowAccel) //GO TO TAKE THE ARTIFACTS, BUT SLOW A BIT SO THEY ROBOT DOESN'T PUSH THEM ACCIDENTALLY, SAME HEADING
 
@@ -53,14 +56,44 @@ public class MeepMeepTesting {
                         .waitSeconds(5) //SHOOT BALLS
 
                         .splineToSplineHeading(new Pose2d(12,-23, (Math.PI * 3) / 2), (Math.PI* 3 )/ 2) //ALIGN WITH THE OTHER 3 ARTIFACTS
-                        .splineToSplineHeading(new Pose2d(12,-53,(Math.PI * 3) / 2),(Math.PI * 3) / 2,
+                        .splineToSplineHeading(new Pose2d(12,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2,
                                 slowVel,
                                 slowAccel)
                         .lineToYLinearHeading(-40,(Math.PI * 3) / 2 ) //PREPARE FOR TELEOP AND MANUAL SHOOTING!
-                        .endTrajectory()
+                        .endTrajectory().build());
 
-                        .build());
 
+         */
+
+
+
+        //BLUE AUTONOMOUS TOUCHING WALL!
+
+
+        Pose2d initialPose = new Pose2d(-61,-23, 0);
+
+        myBot.runAction(
+                myBot.getDrive().actionBuilder(initialPose)
+                        .lineToXLinearHeading(-30,Math.PI / 4)
+                        .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.PI/4), Math.PI/4)
+                        .waitSeconds(5)
+                        .turn((Math.PI * 5) / 4)
+                        .lineToYLinearHeading(-30, (Math.PI * 3) / 2)
+                        .splineToLinearHeading(new Pose2d(-11.5,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2 ,
+                                slowVel,
+                                slowAccel) //GO TO TAKE THE ARTIFACTS, BUT SLOW A BIT SO THEY ROBOT DOESN'T PUSH THEM ACCIDENTALLY, SAME HEADING
+
+
+                        .lineToYLinearHeading(-40,(Math.PI * 3) / 2 ) //THIS IS JUST SO THE SPLINE DOESN'T MAKE THE ROBOT COLLIDE WITH THE PATH
+                        .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.PI/4), Math.PI/4)
+                        .waitSeconds(5)
+                        .splineToSplineHeading(new Pose2d(12,-23, (Math.PI * 3) / 2), (Math.PI* 3 )/ 2) //ALIGN WITH THE OTHER 3 ARTIFACTS
+                        .splineToSplineHeading(new Pose2d(12,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2,
+                                slowVel,
+                                slowAccel)
+                        .lineToYLinearHeading(-40,(Math.PI * 3) / 2 ) //PREPARE FOR TELEOP AND MANUAL SHOOTING!
+                        .endTrajectory().build());
+         
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
                 .setDarkMode(true)
