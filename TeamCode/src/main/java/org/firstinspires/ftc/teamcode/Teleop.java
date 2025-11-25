@@ -22,8 +22,8 @@ public class Teleop extends LinearOpMode {
     public CRServo hopper;
 
     private static final int bankVelocity = 1300;
-    private static final int farVelocity = 1500;
-    //private static final int maxVelocity = 2200;
+    private static final int farVelocity = 1900;
+    private static final int maxVelocity = 2200;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -87,7 +87,7 @@ public class Teleop extends LinearOpMode {
                 intake.setPower(1);
 
             } else if (gamepad1.b) {
-                intake.setPower(0);
+                intake.setPower(    0);
             }
 
             //TODO: Change gamepad controls according to each driver's preferences
@@ -153,9 +153,9 @@ public class Teleop extends LinearOpMode {
      * The servo will spin until the bumper is released.
      */
     private void farPowerAuto() {
-        ((DcMotorEx) launcher).setVelocity(farVelocity);
+        ((DcMotorEx) launcher).setVelocity(maxVelocity);
         hopper.setPower(1);
-        if (((DcMotorEx) launcher).getVelocity() >= farVelocity - 100) {
+        if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300) {
             coreHex.setPower(1);
         } else {
             coreHex.setPower(0);

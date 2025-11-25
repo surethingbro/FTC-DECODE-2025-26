@@ -10,7 +10,7 @@ import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
-public class MeepMeepTesting {
+public class BlueTrajectories {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(650);
 
@@ -30,16 +30,17 @@ public class MeepMeepTesting {
 
 
          //BLUE AUTONOMOUS TOUCHING THE BLUE BASKET
-        /*Pose2d initialPose = new Pose2d(-49, -50, (Math.PI / 4)); //45°
+        Pose2d initialPose = new Pose2d(-49, -50, (Math.PI / 4)); //45°
 
 
-        //TODO: VERIFY THAT WE REALLY TAKE 5 SECONDS TO SHOOT THE BALLS (I HOPE WE DO NOT...) IF WE DON'T, CHANGE THE WAITSECONDS!!!!
+        //TODO: VERIFY THAT WE REALLY TAKE 5 SECONDS TO SHOOT THE BALLS (I HOPE WE DO NOT...) IF WE DON'T, CHANGE THE WAIT SECONDS!!!!
         myBot.runAction(
                 myBot.getDrive().actionBuilder(initialPose)
+
                         .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.PI/4), Math.PI/4) //MOVE FORWARD TO SHOOTING SPOT, IN A HEADING OF 45° TO RADIANS
                         .waitSeconds(5) //SHOOT FIRST THREE ARTIFACTS
 
-                        .turn((Math.PI * 5) / 4) // TURN 225° (IN RADIANS OFC), TO ALIGN WITH THE THREE ARTIFACTS
+                        .turn(-(Math.PI * 3 )/ 4)
                         .lineToYLinearHeading(-30, (Math.PI * 3) / 2)  //GET CLOSE TO THEM (HEADING 270°)
 
                         .splineToLinearHeading(new Pose2d(-11.5,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2 ,
@@ -63,21 +64,20 @@ public class MeepMeepTesting {
                         .endTrajectory().build());
 
 
-         */
-
 
 
         //BLUE AUTONOMOUS TOUCHING WALL!
 
-
+/*
         Pose2d initialPose = new Pose2d(-61,-23, 0);
 
         myBot.runAction(
                 myBot.getDrive().actionBuilder(initialPose)
+
                         .lineToXLinearHeading(-30,Math.PI / 4)
                         .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.PI/4), Math.PI/4)
                         .waitSeconds(5)
-                        .turn((Math.PI * 5) / 4)
+                        .turn(-(Math.PI * 3 )/ 4)
                         .lineToYLinearHeading(-30, (Math.PI * 3) / 2)
                         .splineToLinearHeading(new Pose2d(-11.5,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2 ,
                                 slowVel,
@@ -92,8 +92,10 @@ public class MeepMeepTesting {
                                 slowVel,
                                 slowAccel)
                         .lineToYLinearHeading(-40,(Math.PI * 3) / 2 ) //PREPARE FOR TELEOP AND MANUAL SHOOTING!
-                        .endTrajectory().build());
-         
+                                .endTrajectory().build());
+
+
+ */
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
                 .setDarkMode(true)
