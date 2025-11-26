@@ -24,6 +24,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+
 @Config
 @Autonomous
 @SuppressWarnings("unused")
@@ -83,11 +84,16 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
         private DcMotor launcher;
         private DcMotor coreHex;
         private CRServo hopper;
+        private DcMotorEx intake;
 
         public Launcher(HardwareMap hardwareMap) {
             launcher = hardwareMap.get(DcMotorEx.class, "launcher");
             coreHex = hardwareMap.get(DcMotorEx.class, "coreHex");
             hopper = hardwareMap.get(CRServo.class, "hopper");
+            intake = hardwareMap.get(DcMotorEx.class, "intake");
+
+            intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            intake.setDirection(DcMotorSimple.Direction.REVERSE);
 
             launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             launcher.setDirection(DcMotor.Direction.REVERSE);
@@ -105,9 +111,10 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
                     timer = new ElapsedTime();
                 }
 
-                    //BANK SHOT //TODO: CHECK IF BANK SHOT SPEED CAN REACH BASKET
                     ((DcMotorEx) launcher).setVelocity(bankVelocity);
-                    hopper.setPower(-1);
+                    hopper.setPower(1);
+                    intake.setPower(1);
+
                     if (((DcMotorEx) launcher).getVelocity() >= bankVelocity - 100) {
                         coreHex.setPower(1);
                     } else {
@@ -117,7 +124,7 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
                     telemetryPacket.put("Launcher Countdown", timer.seconds());
 
 
-                return timer.milliseconds() < 8000;
+                return timer.milliseconds() < 5500;
             }
         }
         public Action launch() {
@@ -131,6 +138,7 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
                 ((DcMotorEx) launcher).setVelocity(0);
                 coreHex.setPower(0);
                 hopper.setPower(0);
+                intake.setPower(0);
 
                 return false;
             }
@@ -154,31 +162,25 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
         Intake intake = new Intake(hardwareMap);
         Launcher launcher = new Launcher(hardwareMap);
 
-        TrajectoryActionBuilder firstMove = drive.actionBuilder(initialPose)
-            .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.PI/4), Math.PI/4);
 
-        TrajectoryActionBuilder autoTraj = firstMove.endTrajectory().fresh()
-                        .stopAndAdd(launcher.launch())
-                        .afterTime(8,launcher.notlaunch())
-                        .turn(-(Math.PI * 3 )/ 4)
-                        .stopAndAdd(intake.intakeOn())
-                        .lineToYLinearHeading(-30, (Math.PI * 3) / 2)
-                        .splineToLinearHeading(new Pose2d(-11.5,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2 ,
-                                slowVel,
-                                slowAccel)
-                        .afterTime(3, intake.intakeOff())
-                        .lineToYLinearHeading(-40,(Math.PI * 3) / 2 )
-                        .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.PI/4), Math.PI/4)
-                        .stopAndAdd(launcher.launch())
-                        .afterTime(8,launcher.notlaunch())
+        TrajectoryActionBuilder doAuto = drive.actionBuilder(initialPose)
+                .splineToLinearHeading(new Pose2d(-49,-49, Math.toRadians(45)), Math.toRadians(45))
+                .splineToLinearHeading(new Pose2d(-13,-12, Math.toRadians(230)), Math.toRadians(230)) //MOVE FORWARD TO SHOOTING SPOT, IN A HEADING OF 45° TO RADIANS
+                .stopAndAdd(launcher.launch())
+                .stopAndAdd(launcher.notlaunch())
 
+                .turn(Math.toRadians(-142))
 
-                        .splineToSplineHeading(new Pose2d(12,-23, (Math.PI * 3) / 2), (Math.PI* 3 )/ 2)
-                        .stopAndAdd(intake.intakeOn())
-                        .splineToSplineHeading(new Pose2d(12,-50,(Math.PI * 3) / 2),(Math.PI * 3) / 2,
-                        slowVel,
-                        slowAccel)
-                        .lineToYLinearHeading(-40,(Math.PI * 3) / 2 );
+                .setReversed(true)
+                .splineToLinearHeading(new Pose2d(2,-20, Math.toRadians(90)), Math.toRadians(90))
+                .stopAndAdd(intake.intakeOn())
+
+                .lineToYLinearHeading(-55,Math.toRadians(90), slowVel, slowAccel)
+                .afterTime(3, intake.intakeOff())
+
+                .lineToY(-30)
+                .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.toRadians(230)), Math.toRadians(230))
+                .stopAndAdd(launcher.launch());
 
 
 
@@ -188,8 +190,7 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
 
         Actions.runBlocking(
                 new SequentialAction(
-                    firstMove.build(),
-                    autoTraj.build()
+                        doAuto.build()
                 )
         );
     }
