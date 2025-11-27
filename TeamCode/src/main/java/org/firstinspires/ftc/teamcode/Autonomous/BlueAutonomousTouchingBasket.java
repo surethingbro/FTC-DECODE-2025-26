@@ -11,6 +11,7 @@ import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.VelConstraint;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -156,7 +157,6 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
         VelConstraint slowVel = new TranslationalVelConstraint(15);
         AccelConstraint slowAccel = new ProfileAccelConstraint(-20,20);
 
-
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Intake intake = new Intake(hardwareMap);
@@ -180,7 +180,10 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
 
                 .lineToY(-30)
                 .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.toRadians(230)), Math.toRadians(230))
-                .stopAndAdd(launcher.launch());
+                .stopAndAdd(launcher.launch())
+
+                .strafeTo(new Vector2d(0,-23));
+
 
 
 

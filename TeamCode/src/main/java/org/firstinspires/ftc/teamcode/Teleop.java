@@ -87,16 +87,19 @@ public class Teleop extends LinearOpMode {
                 intake.setPower(1);
 
             } else if (gamepad1.b) {
-                intake.setPower(    0);
+                intake.setPower(0);
+            } else if (gamepad1.y) {
+                intake.setPower(-1);
             }
 
             //TODO: Change gamepad controls according to each driver's preferences
             // Manual control for the Core Hex
-            if (gamepad1.a) {
+            if (gamepad2.a) {
                 coreHex.setPower(0.5);
-            } else if (gamepad1.y) {
+            } else if (gamepad2.y) {
                 coreHex.setPower(-0.5);
             }
+
             //TODO: Change gamepad controls according to each driver's preferences
             // Manual control for the hopper's servo
             if (gamepad1.dpad_left) {
@@ -104,6 +107,7 @@ public class Teleop extends LinearOpMode {
             } else if (gamepad1.dpad_right) {
                 hopper.setPower(-1);
             }
+
             telemetry.addData("Flywheel Velocity", ((DcMotorEx) launcher).getVelocity());
             telemetry.addData("Flywheel Power", launcher.getPower());
             telemetry.update();
@@ -117,9 +121,9 @@ public class Teleop extends LinearOpMode {
      */
 
     private void setFlywheelVelocity() {
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             farPowerAuto();
-        } else if (gamepad1.right_bumper) {
+        } else if (gamepad2.right_bumper) {
             bankShotAuto();
         }  else {
             ((DcMotorEx) launcher).setVelocity(0);
