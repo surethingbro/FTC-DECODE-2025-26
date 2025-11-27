@@ -182,7 +182,7 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
                 .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.toRadians(230)), Math.toRadians(230))
                 .stopAndAdd(launcher.launch())
 
-                .strafeTo(new Vector2d(0,-23));
+                .strafeTo(new Vector2d(3,-27));
 
 
 

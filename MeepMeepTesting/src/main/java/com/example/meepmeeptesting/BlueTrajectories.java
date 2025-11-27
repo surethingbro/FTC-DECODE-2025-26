@@ -49,7 +49,7 @@ public class BlueTrajectories {
                         .splineToLinearHeading(new Pose2d(-11.5,-12.4, Math.toRadians(230)), Math.toRadians(230))
                         .waitSeconds(2)
 
-                        .strafeTo(new Vector2d(0,-23))
+                        .strafeTo(new Vector2d(0,-27))
                         .endTrajectory().build());
 
 
