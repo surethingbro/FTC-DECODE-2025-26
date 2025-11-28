@@ -121,6 +121,11 @@ public class RedAutonomousTouchingWall extends LinearOpMode {
                     coreHex.setPower(0);
                 }
 
+                if (((DcMotorEx) launcher).getVelocity() != maxVelocity - 300) {
+                    ((DcMotorEx) launcher).setVelocity(maxVelocity - 300);
+                }
+
+                telemetry.addData("Launcher Velocity", ((DcMotorEx) launcher).getVelocity());
                 telemetryPacket.put("Launcher Countdown", timer.seconds());
 
 

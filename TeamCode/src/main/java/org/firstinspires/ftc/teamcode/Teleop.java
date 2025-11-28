@@ -64,7 +64,7 @@ public class Teleop extends LinearOpMode {
 
         while ( opModeIsActive() ) {
 
-            double forwardPower = -gamepad1.left_stick_y;
+            double  forwardPower = -gamepad1.left_stick_y;
             double lateralPower = gamepad1.left_stick_x;
             double turnPower = -gamepad1.right_stick_x;
 

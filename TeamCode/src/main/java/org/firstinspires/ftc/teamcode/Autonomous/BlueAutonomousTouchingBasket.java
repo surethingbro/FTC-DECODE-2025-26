@@ -122,7 +122,12 @@ public class BlueAutonomousTouchingBasket extends LinearOpMode {
                         coreHex.setPower(0);
                     }
 
-                    telemetryPacket.put("Launcher Countdown", timer.seconds());
+                    if (((DcMotorEx) launcher).getVelocity() != bankVelocity -100) {
+                        ((DcMotorEx) launcher).setVelocity(bankVelocity - 100);
+                    }
+
+                telemetry.addData("Launcher Velocity", ((DcMotorEx) launcher).getVelocity());
+                telemetryPacket.put("Launcher Countdown", timer.seconds());
 
 
                 return timer.milliseconds() < 5500;

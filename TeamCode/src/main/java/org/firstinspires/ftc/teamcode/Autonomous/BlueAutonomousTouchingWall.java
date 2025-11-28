@@ -120,8 +120,12 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
                     coreHex.setPower(0);
                 }
 
-                telemetryPacket.put("Launcher Countdown", timer.seconds());
+                if (((DcMotorEx) launcher).getVelocity() != maxVelocity - 300) {
+                    ((DcMotorEx) launcher).setVelocity(maxVelocity - 300);
+                }
 
+                telemetry.addData("Launcher Velocity", ((DcMotorEx) launcher).getVelocity());
+                telemetryPacket.put("Launcher Countdown", timer.seconds());
 
                 return timer.milliseconds() < 10000;
             }

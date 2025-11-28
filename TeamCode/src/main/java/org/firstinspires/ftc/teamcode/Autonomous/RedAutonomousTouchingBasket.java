@@ -115,12 +115,17 @@ public class RedAutonomousTouchingBasket extends LinearOpMode {
                 hopper.setPower(1);
                 intake.setPower(1);
 
+                if (((DcMotorEx) launcher).getVelocity() != bankVelocity -100) {
+                    ((DcMotorEx) launcher).setVelocity(bankVelocity - 100);
+                }
+
                 if (((DcMotorEx) launcher).getVelocity() >= bankVelocity - 100) {
                     coreHex.setPower(1);
                 } else {
                     coreHex.setPower(0);
                 }
 
+                telemetry.addData("Launcher Velocity", ((DcMotorEx) launcher).getVelocity());
                 telemetryPacket.put("Launcher Countdown", timer.seconds());
 
 
