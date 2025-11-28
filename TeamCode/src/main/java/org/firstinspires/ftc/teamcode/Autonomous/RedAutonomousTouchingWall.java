@@ -25,10 +25,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+@SuppressWarnings("unused")
 @Config
 @Autonomous
-@SuppressWarnings("unused")
-public class BlueAutonomousTouchingWall extends LinearOpMode {
+public class RedAutonomousTouchingWall extends LinearOpMode {
+
     private static final int bankVelocity = 1300;
     private static final int farVelocity = 1900;
     private static final int maxVelocity = 2200;
@@ -114,7 +115,7 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
                 hopper.setPower(1);
                 intake.setPower(1);
 
-                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300 ) {
+                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300) {
                     coreHex.setPower(1);
                 } else {
                     coreHex.setPower(0);
@@ -150,11 +151,10 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        Pose2d initialPose = new Pose2d(61,-22, 0);
+        Pose2d initialPose = new Pose2d(61, 22, 0);
 
         VelConstraint slowVel = new TranslationalVelConstraint(15);
-        AccelConstraint slowAccel = new ProfileAccelConstraint(-20,20);
-
+        AccelConstraint slowAccel = new ProfileAccelConstraint(-20, 20);
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
@@ -163,10 +163,11 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
 
         TrajectoryActionBuilder doAuto = drive.actionBuilder(initialPose)
                 .setReversed(true)
-                .splineTo(new Vector2d(55,-10), Math.toRadians(25))
+                .splineTo(new Vector2d(55, 10), Math.toRadians(-30))
                 .stopAndAdd(launcher.launch())
                 .stopAndAdd(launcher.notlaunch())
-                .splineToSplineHeading(new Pose2d(46,-23,Math.toRadians(0)), Math.toRadians(0));
+
+                .splineToSplineHeading(new Pose2d(46,23,Math.toRadians(0)), Math.toRadians(0));
 
 
         waitForStart();
@@ -179,7 +180,6 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
                 )
         );
 
-
-
+        }
     }
-}
+

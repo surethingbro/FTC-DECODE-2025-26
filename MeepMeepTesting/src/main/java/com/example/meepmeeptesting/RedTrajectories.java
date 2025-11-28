@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.AccelConstraint;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.VelConstraint;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
@@ -30,60 +31,45 @@ public class RedTrajectories {
 
 
         //RED AUTONOMOUS TOUCHING BASKET
+        /*
         Pose2d initialPose = new Pose2d(-49,50, (Math.PI * 7 )/ 4); //315°
 
+
         myBot.runAction(
                 myBot.getDrive().actionBuilder(initialPose)
-                        .splineToLinearHeading(new Pose2d(-12,12, (Math.PI * 7 )/ 4), (Math.PI * 7 )/ 4)
-                        .waitSeconds(5)
-                        .turnTo(Math.PI / 2)
 
-                        .lineToYLinearHeading(30, Math.PI / 2)
-                        .splineToLinearHeading(new Pose2d(-12,50,Math.PI / 2),Math.PI / 2 ,
-                                slowVel,
-                                slowAccel)
+                        .splineToLinearHeading(new Pose2d(-11.5,12.4, Math.toRadians(130)), Math.toRadians(130))
+                        .turnTo(Math.toRadians(270))
 
-                        .lineToYLinearHeading(40,Math.PI/ 2 )
-                        .splineToLinearHeading(new Pose2d(-12,12.4, (Math.PI * 7 )/ 4), (Math.PI * 7 )/ 4)
-                        .waitSeconds(5)
+                        .splineToLinearHeading(new Pose2d(0,20, Math.toRadians(270)), Math.toRadians(270))
+                        .lineToYLinearHeading(45,Math.toRadians(270), slowVel, slowAccel)
 
-                        .splineToSplineHeading(new Pose2d(12,23, Math.PI / 2), Math.PI/ 2) //ALIGN WITH THE OTHER 3 ARTIFACTS
-                        .splineToSplineHeading(new Pose2d(12,50,Math.PI  /2),Math.PI / 2,
-                                slowVel,
-                                slowAccel)
-                        .lineToYLinearHeading(40,Math.PI / 2 )
+                        .lineToY(30)
+                        .splineToLinearHeading(new Pose2d(-11.5,12.4, Math.toRadians(130)), Math.toRadians(130))
+
+                        .strafeTo(new Vector2d(5,20))
+
+
                         .endTrajectory().build());
-
+         */
 
     //RED AUTONOMOUS TOUCHING WALL
-/*
-        Pose2d initialPose = new Pose2d(-61,23, 0);
+
+        Pose2d initialPose = new Pose2d(61,22, 0);
 
         myBot.runAction(
                 myBot.getDrive().actionBuilder(initialPose)
-                        .lineToXLinearHeading(-30,(Math.PI * 7) / 4)
-                        .splineToLinearHeading(new Pose2d(-12,12, (Math.PI * 7 )/ 4), (Math.PI * 7 )/ 4)
-                        .waitSeconds(5)
-                        .turnTo(Math.PI / 2)
 
-                        .lineToYLinearHeading(30, Math.PI / 2)
-                        .splineToLinearHeading(new Pose2d(-12,50,Math.PI / 2),Math.PI / 2 ,
-                                slowVel,
-                                slowAccel)
+                        .setReversed(true)
+                        .splineTo(new Vector2d(55,10), Math.toRadians(-35))
 
-                        .lineToYLinearHeading(40,Math.PI/ 2 )
-                        .splineToLinearHeading(new Pose2d(-12,12.4, (Math.PI * 7 )/ 4), (Math.PI * 7 )/ 4)
-                        .waitSeconds(5)
+                        .waitSeconds(2)
+                        .splineToSplineHeading(new Pose2d(46,23,Math.toRadians(0)), Math.toRadians(0))
 
-                        .splineToSplineHeading(new Pose2d(12,23, Math.PI / 2), Math.PI/ 2) //ALIGN WITH THE OTHER 3 ARTIFACTS
-                        .splineToSplineHeading(new Pose2d(12,50,Math.PI  /2),Math.PI / 2,
-                                slowVel,
-                                slowAccel)
-                        .lineToYLinearHeading(40,Math.PI / 2 )
 
                 .endTrajectory().build());
 
- */
+
             meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
                     .setDarkMode(true)
                     .setBackgroundAlpha(0.95f)

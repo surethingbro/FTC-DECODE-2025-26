@@ -25,10 +25,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+@SuppressWarnings("unused")
 @Config
 @Autonomous
-@SuppressWarnings("unused")
-public class BlueAutonomousTouchingWall extends LinearOpMode {
+public class RedAutonomousTouchingBasket extends LinearOpMode {
+
     private static final int bankVelocity = 1300;
     private static final int farVelocity = 1900;
     private static final int maxVelocity = 2200;
@@ -110,11 +111,11 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
                     timer = new ElapsedTime();
                 }
 
-                ((DcMotorEx) launcher).setVelocity(maxVelocity);
+                ((DcMotorEx) launcher).setVelocity(bankVelocity);
                 hopper.setPower(1);
                 intake.setPower(1);
 
-                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300 ) {
+                if (((DcMotorEx) launcher).getVelocity() >= bankVelocity - 100) {
                     coreHex.setPower(1);
                 } else {
                     coreHex.setPower(0);
@@ -123,7 +124,7 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
                 telemetryPacket.put("Launcher Countdown", timer.seconds());
 
 
-                return timer.milliseconds() < 10000;
+                return timer.milliseconds() < 5500;
             }
         }
         public Action launch() {
@@ -150,11 +151,10 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        Pose2d initialPose = new Pose2d(61,-22, 0);
+        Pose2d initialPose = new Pose2d(-49,50, (Math.PI * 7 )/ 4); //315°
 
         VelConstraint slowVel = new TranslationalVelConstraint(15);
         AccelConstraint slowAccel = new ProfileAccelConstraint(-20,20);
-
 
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
@@ -162,24 +162,34 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
         Launcher launcher = new Launcher(hardwareMap);
 
         TrajectoryActionBuilder doAuto = drive.actionBuilder(initialPose)
-                .setReversed(true)
-                .splineTo(new Vector2d(55,-10), Math.toRadians(25))
+                .splineToLinearHeading(new Pose2d(-11.5,12.4, Math.toRadians(130)), Math.toRadians(130))
                 .stopAndAdd(launcher.launch())
                 .stopAndAdd(launcher.notlaunch())
-                .splineToSplineHeading(new Pose2d(46,-23,Math.toRadians(0)), Math.toRadians(0));
 
+                .turnTo(Math.toRadians(270))
+
+                .splineToLinearHeading(new Pose2d(-1,20, Math.toRadians(270)), Math.toRadians(270))
+                .stopAndAdd(intake.intakeOn())
+
+                .lineToYLinearHeading(55 ,Math.toRadians(270), slowVel, slowAccel)
+                .afterTime(3, intake.intakeOff())
+
+                .lineToY(30)
+                .splineToLinearHeading(new Pose2d(-11.5,12.4, Math.toRadians(130)), Math.toRadians(130))
+                .stopAndAdd(launcher.launch())
+                .stopAndAdd(launcher.notlaunch())
+
+                .strafeTo(new Vector2d(10,20));
 
         waitForStart();
 
-        if (isStopRequested()) {return;}
+        if (isStopRequested()) { return; }
 
         Actions.runBlocking(
                 new SequentialAction(
                         doAuto.build()
                 )
         );
-
-
 
     }
 }
