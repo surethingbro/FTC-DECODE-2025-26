@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.Testing;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Mechanisms.AprilTagWebcam;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
@@ -13,7 +11,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 public class AprilTagTest extends LinearOpMode {
 
     AprilTagWebcam aprilTagWebcam = new AprilTagWebcam();
-    //
+
     @Override
     public void runOpMode() throws InterruptedException {
 
