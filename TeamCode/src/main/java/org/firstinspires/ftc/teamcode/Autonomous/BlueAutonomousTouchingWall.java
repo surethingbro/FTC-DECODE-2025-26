@@ -114,14 +114,14 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
                 hopper.setPower(1);
                 intake.setPower(1);
 
-                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300 ) {
+                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 400 ) {
                     coreHex.setPower(1);
                 } else {
                     coreHex.setPower(0);
                 }
 
-                if (((DcMotorEx) launcher).getVelocity() != maxVelocity - 300) {
-                    ((DcMotorEx) launcher).setVelocity(maxVelocity - 300);
+                if (((DcMotorEx) launcher).getVelocity() != maxVelocity - 400) {
+                    ((DcMotorEx) launcher).setVelocity(maxVelocity - 400);
                 }
 
                 telemetry.addData("Launcher Velocity", ((DcMotorEx) launcher).getVelocity());
@@ -167,15 +167,15 @@ public class BlueAutonomousTouchingWall extends LinearOpMode {
 
         TrajectoryActionBuilder doAuto = drive.actionBuilder(initialPose)
                 .setReversed(true)
-                .splineTo(new Vector2d(55,-10), Math.toRadians(25))
+                .splineTo(new Vector2d(60,-10), Math.toRadians(30))
                 .stopAndAdd(launcher.launch())
                 .stopAndAdd(launcher.notlaunch())
-                .splineToSplineHeading(new Pose2d(46,-23,Math.toRadians(0)), Math.toRadians(0));
+                .strafeToConstantHeading(new Vector2d(57,-35));
 
 
         waitForStart();
 
-        if (isStopRequested()) {return;}
+        if (isStopRequested()) { return; }
 
         Actions.runBlocking(
                 new SequentialAction(

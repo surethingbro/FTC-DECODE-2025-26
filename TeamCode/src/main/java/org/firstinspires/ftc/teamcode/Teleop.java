@@ -159,7 +159,7 @@ public class Teleop extends LinearOpMode {
     private void farPowerAuto() {
         ((DcMotorEx) launcher).setVelocity(maxVelocity);
         hopper.setPower(1);
-        if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300) {
+        if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 400) {
             coreHex.setPower(1);
         } else {
             coreHex.setPower(0);

@@ -64,8 +64,7 @@ public class RedTrajectories {
                         .splineTo(new Vector2d(55,10), Math.toRadians(-35))
 
                         .waitSeconds(2)
-                        .splineToSplineHeading(new Pose2d(46,23,Math.toRadians(0)), Math.toRadians(0))
-
+                        .strafeToConstantHeading(new Vector2d(57,35))
 
                 .endTrajectory().build());
 

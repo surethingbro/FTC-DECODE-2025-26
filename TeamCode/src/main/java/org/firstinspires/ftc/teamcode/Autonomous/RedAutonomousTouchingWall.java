@@ -115,14 +115,14 @@ public class RedAutonomousTouchingWall extends LinearOpMode {
                 hopper.setPower(1);
                 intake.setPower(1);
 
-                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 300) {
+                if (((DcMotorEx) launcher).getVelocity() >= maxVelocity - 400) {
                     coreHex.setPower(1);
                 } else {
                     coreHex.setPower(0);
                 }
 
-                if (((DcMotorEx) launcher).getVelocity() != maxVelocity - 300) {
-                    ((DcMotorEx) launcher).setVelocity(maxVelocity - 300);
+                if (((DcMotorEx) launcher).getVelocity() != maxVelocity - 400) {
+                    ((DcMotorEx) launcher).setVelocity(maxVelocity - 400);
                 }
 
                 telemetry.addData("Launcher Velocity", ((DcMotorEx) launcher).getVelocity());
@@ -172,7 +172,7 @@ public class RedAutonomousTouchingWall extends LinearOpMode {
                 .stopAndAdd(launcher.launch())
                 .stopAndAdd(launcher.notlaunch())
 
-                .splineToSplineHeading(new Pose2d(46,23,Math.toRadians(0)), Math.toRadians(0));
+                .strafeToConstantHeading(new Vector2d(57,35));
 
 
         waitForStart();

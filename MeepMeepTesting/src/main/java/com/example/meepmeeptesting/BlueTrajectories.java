@@ -32,7 +32,7 @@ public class BlueTrajectories {
 
          //BLUE AUTONOMOUS TOUCHING THE BLUE BASKET
 
-
+/*
         Pose2d initialPose = new Pose2d(-49, -50, (Math.PI / 4)); //45°
 
         myBot.runAction(
@@ -53,24 +53,22 @@ public class BlueTrajectories {
                         .endTrajectory().build());
 
 
-
-
+ */
 
         //BLUE AUTONOMOUS TOUCHING WALL!
 
-/*
+
         Pose2d initialPose = new Pose2d(61,-22, 0);
 
         myBot.runAction(
                 myBot.getDrive().actionBuilder(initialPose)
 
                         .setReversed(true)
-                        .splineTo(new Vector2d(60,-10), Math.toRadians(25))
-                        .splineToSplineHeading(new Pose2d(46,-23,Math.toRadians(0)), Math.toRadians(0))
+                        .splineTo(new Vector2d(62,-10), Math.toRadians(25))
                          //GO TO TAKE THE ARTIFACTS, BUT SLOW A BIT SO THEY ROBOT DOESN'T PUSH THEM ACCIDENTALLY, SAME HEADING//PREPARE FOR TELEOP AND MANUAL SHOOTING!
                                 .endTrajectory().build());
 
-*/
+
 
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_DECODE_JUICE_DARK)
